@@ -6,7 +6,7 @@
 ![Dependencies: none](https://img.shields.io/badge/dependencies-none-lightgrey)
 ![Network: none](https://img.shields.io/badge/network-none-lightgrey)
 
-**Version:** 0.2.0
+**Version:** 0.2.1
 
 Open-source macOS menu-bar app for 20-20-20 screen breaks — a free, open-source alternative to apps like [LookAway](https://lookaway.com/). May reduce eye strain and dry-eye symptoms by supporting healthier screen habits.
 

@@ -4,6 +4,8 @@ All notable changes to EyeBreak are documented here. Format follows [Keep a Chan
 
 ## [Unreleased]
 
+## [0.2.1] — 2026-07-19
+
 ### Added
 - Distribution: downloadable `.app` zip on releases, Homebrew tap (`brew install --cask sviatil0/tap/eyebreak`), install and Gatekeeper docs, LookAway-alternative positioning.
 
