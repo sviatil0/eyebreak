@@ -4,8 +4,13 @@ All notable changes to EyeBreak are documented here. Format follows [Keep a Chan
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-07-19
+
 ### Changed
 - UI polish pass: overlay vignette scrim, dark material card, dusk-blue countdown ring and capsule buttons; grouped settings form with accent-icon sections; calm chart-free stats list; wider "When to Get Checked" layout. No copy or behavior changes.
+
+### Fixed
+- CI: run on macos-15 so the Swift Testing toolchain (Xcode 16) is available to `swift test`.
 
 ## [0.1.0] — 2026-07-19
 
