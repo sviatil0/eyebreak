@@ -12,32 +12,47 @@ struct WhenToGetCheckedView: View {
     ]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
+        VStack(alignment: .leading, spacing: 20) {
             Text(CopyStrings.checkedTitle)
-                .font(.title2.weight(.semibold))
+                .font(.system(size: 20, weight: .semibold))
 
             Text(CopyStrings.checkedIntro)
+                .lineSpacing(3)
+                .fixedSize(horizontal: false, vertical: true)
 
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading, spacing: 10) {
                 ForEach(bullets, id: \.self) { bullet in
-                    HStack(alignment: .firstTextBaseline, spacing: 8) {
-                        Text("•")
+                    HStack(alignment: .firstTextBaseline, spacing: 10) {
+                        Image(systemName: "circle.fill")
+                            .font(.system(size: 5))
+                            .foregroundStyle(.secondary)
                         Text(bullet)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
             }
+            .padding(.leading, 4)
 
-            Divider()
-
+            // Educational note, visually set apart by a hairline box only —
+            // deliberately not an alert style.
             Text(CopyStrings.checkedItchNote)
                 .font(.callout)
                 .foregroundColor(.secondary)
+                .lineSpacing(3)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .strokeBorder(Color(nsColor: .separatorColor), lineWidth: 1)
+                )
 
             Text(CopyStrings.checkedDisclaimer)
-                .font(.caption)
+                .font(.footnote)
                 .foregroundColor(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(20)
-        .frame(width: 420)
+        .frame(width: 560, alignment: .leading)
+        .padding(24)
     }
 }

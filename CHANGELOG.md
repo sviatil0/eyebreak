@@ -4,6 +4,9 @@ All notable changes to EyeBreak are documented here. Format follows [Keep a Chan
 
 ## [Unreleased]
 
+### Changed
+- UI polish pass: overlay vignette scrim, dark material card, dusk-blue countdown ring and capsule buttons; grouped settings form with accent-icon sections; calm chart-free stats list; wider "When to Get Checked" layout. No copy or behavior changes.
+
 ## [0.1.0] — 2026-07-19
 
 Initial release.

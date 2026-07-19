@@ -33,6 +33,7 @@ final class OverlayWindowController {
 
         model.phase = .grace
         model.remaining = breakSeconds
+        model.total = breakSeconds
         model.snoozeMinutes = snoozeMinutes
         model.onSnooze = { [weak self] in self?.onSnooze?() }
         model.onSkip = { [weak self] in self?.onSkip?() }
@@ -86,6 +87,7 @@ final class OverlayWindowController {
         guard isVisible else { return }
         model.phase = .counting
         model.remaining = seconds
+        model.total = seconds
 
         let timer = DispatchSource.makeTimerSource(queue: .main)
         timer.schedule(deadline: .now() + 1, repeating: 1)

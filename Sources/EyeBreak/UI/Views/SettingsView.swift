@@ -10,30 +10,31 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            intervalsSection
-            Divider()
+            breaksSection
             quietSection
-            Divider()
             remindersSection
-            Divider()
             generalSection
         }
-        .padding(20)
-        .frame(width: 440)
+        .formStyle(.grouped)
+        .toggleStyle(.switch)
+        .tint(Color.duskBlue)
+        .frame(width: 440, height: 700)
     }
 
-    // MARK: - Intervals
+    // MARK: - Breaks
 
-    private var intervalsSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Button(CopyStrings.settingsPresetButton) {
-                store.settings.workIntervalSec = 1200
-                store.settings.breakDurationSec = 20
-                store.settings.snoozeDurationSec = 180
+    // No section-title string exists for this group (copy is frozen), so the
+    // section identity is carried by the accent icon alone.
+    private var breaksSection: some View {
+        Section {
+            VStack(alignment: .leading, spacing: 6) {
+                Button(CopyStrings.settingsPresetButton) {
+                    store.settings.workIntervalSec = 1200
+                    store.settings.breakDurationSec = 20
+                    store.settings.snoozeDurationSec = 180
+                }
+                caption(CopyStrings.settingsPresetCaption)
             }
-            Text(CopyStrings.settingsPresetCaption)
-                .font(.caption)
-                .foregroundColor(.secondary)
 
             stepper(
                 label: "Work interval",
@@ -58,39 +59,46 @@ struct SettingsView: View {
                 value: minutesBinding(\.idleThresholdSec),
                 range: 1...30, unit: "min"
             )
+        } header: {
+            sectionIcon("timer")
         }
     }
 
     // MARK: - Quiet mode
 
     private var quietSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(CopyStrings.settingsQuietSectionTitle).font(.headline)
+        Section {
             Toggle(CopyStrings.settingsQuietFullScreen, isOn: $store.settings.quietOnFullScreen)
-            Toggle(CopyStrings.settingsQuietSharing, isOn: $store.settings.quietOnScreenSharing)
-            Text(CopyStrings.settingsQuietCaption)
-                .font(.caption)
-                .foregroundColor(.secondary)
+            VStack(alignment: .leading, spacing: 6) {
+                Toggle(CopyStrings.settingsQuietSharing, isOn: $store.settings.quietOnScreenSharing)
+                caption(CopyStrings.settingsQuietCaption)
+            }
+        } header: {
+            sectionHeader(CopyStrings.settingsQuietSectionTitle, systemImage: "moon")
         }
     }
 
     // MARK: - Extra reminders
 
     private var remindersSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(CopyStrings.settingsRemindersSectionTitle).font(.headline)
+        Section {
+            VStack(alignment: .leading, spacing: 6) {
+                Toggle(CopyStrings.settingsBlinkToggle, isOn: $store.settings.blinkReminderOn)
+                caption(CopyStrings.settingsBlinkCaption)
+            }
 
-            Toggle(CopyStrings.settingsBlinkToggle, isOn: $store.settings.blinkReminderOn)
-            caption(CopyStrings.settingsBlinkCaption)
-
-            Toggle(CopyStrings.settingsCompressToggle, isOn: $store.settings.warmCompressOn)
-            caption(CopyStrings.settingsCompressCaption)
+            VStack(alignment: .leading, spacing: 6) {
+                Toggle(CopyStrings.settingsCompressToggle, isOn: $store.settings.warmCompressOn)
+                caption(CopyStrings.settingsCompressCaption)
+            }
             if store.settings.warmCompressOn {
                 timePicker(label: "Reminder time", keyPath: \.warmCompressTime)
             }
 
-            Toggle(CopyStrings.settingsTearsToggle, isOn: $store.settings.tearsReminderOn)
-            caption(CopyStrings.settingsTearsCaption)
+            VStack(alignment: .leading, spacing: 6) {
+                Toggle(CopyStrings.settingsTearsToggle, isOn: $store.settings.tearsReminderOn)
+                caption(CopyStrings.settingsTearsCaption)
+            }
             if store.settings.tearsReminderOn {
                 stepper(
                     label: "Every",
@@ -102,22 +110,32 @@ struct SettingsView: View {
                 )
             }
 
-            Toggle(CopyStrings.settingsEnvironmentToggle, isOn: $store.settings.environmentRemindersOn)
-            caption(CopyStrings.settingsEnvironmentCaption)
+            VStack(alignment: .leading, spacing: 6) {
+                Toggle(CopyStrings.settingsEnvironmentToggle, isOn: $store.settings.environmentRemindersOn)
+                caption(CopyStrings.settingsEnvironmentCaption)
+            }
+        } header: {
+            sectionHeader(CopyStrings.settingsRemindersSectionTitle, systemImage: "drop")
         }
     }
 
     // MARK: - General
 
+    // No section-title string exists for this group (copy is frozen), so the
+    // section identity is carried by the accent icon alone.
     private var generalSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        Section {
             Toggle("Show countdown in menu bar", isOn: $store.settings.showCountdownInMenuBar)
 
-            Toggle(CopyStrings.settingsLaunchAtLogin, isOn: launchAtLoginBinding)
-                .disabled(!runningFromBundle)
-            if !runningFromBundle {
-                caption(CopyStrings.settingsLaunchAtLoginDisabledCaption)
+            VStack(alignment: .leading, spacing: 6) {
+                Toggle(CopyStrings.settingsLaunchAtLogin, isOn: launchAtLoginBinding)
+                    .disabled(!runningFromBundle)
+                if !runningFromBundle {
+                    caption(CopyStrings.settingsLaunchAtLoginDisabledCaption)
+                }
             }
+        } header: {
+            sectionIcon("gearshape")
         }
     }
 
@@ -142,6 +160,20 @@ struct SettingsView: View {
     }
 
     // MARK: - Helpers
+
+    private func sectionHeader(_ title: String, systemImage: String) -> some View {
+        Label {
+            Text(title)
+        } icon: {
+            Image(systemName: systemImage)
+                .foregroundStyle(Color.duskBlue)
+        }
+    }
+
+    private func sectionIcon(_ systemImage: String) -> some View {
+        Image(systemName: systemImage)
+            .foregroundStyle(Color.duskBlue)
+    }
 
     private func minutesBinding(_ keyPath: WritableKeyPath<Settings, Int>) -> Binding<Int> {
         Binding(
@@ -185,9 +217,9 @@ struct SettingsView: View {
 
     private func caption(_ text: String) -> some View {
         Text(text)
-            .font(.caption)
+            .font(.footnote)
             .foregroundColor(.secondary)
-            .padding(.bottom, 2)
+            .fixedSize(horizontal: false, vertical: true)
     }
 
     static func date(from hhmm: String) -> Date {

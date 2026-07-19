@@ -39,6 +39,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if !settingsStore.settings.hasCompletedWelcome {
             showWelcome()
         }
+
+        // QA hook: lets scripts screenshot windows without UI scripting.
+        switch ProcessInfo.processInfo.environment["EYEBREAK_DEBUG_OPEN"] {
+        case "settings": showSettings()
+        case "stats": showStats()
+        case "checked": showWhenToGetChecked()
+        default: break
+        }
     }
 
     func applicationWillTerminate(_ notification: Notification) {
