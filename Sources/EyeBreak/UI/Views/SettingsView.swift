@@ -17,7 +17,8 @@ struct SettingsView: View {
         }
         .formStyle(.grouped)
         .toggleStyle(.switch)
-        .frame(width: 440, height: 640)
+        .tint(Color.duskBlue)
+        .frame(width: 440, height: 700)
     }
 
     // MARK: - Breaks
