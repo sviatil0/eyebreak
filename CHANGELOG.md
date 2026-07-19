@@ -4,6 +4,9 @@ All notable changes to EyeBreak are documented here. Format follows [Keep a Chan
 
 ## [Unreleased]
 
+### Fixed
+- Documented the notched-MacBook pitfall where the menu-bar icon lands under the notch, with verified workarounds (#12).
+
 ## [0.2.1] — 2026-07-19
 
 ### Added
