@@ -6,9 +6,9 @@
 ![Dependencies: none](https://img.shields.io/badge/dependencies-none-lightgrey)
 ![Network: none](https://img.shields.io/badge/network-none-lightgrey)
 
-**Version:** 0.2.0
+**Version:** 0.2.1
 
-Open-source macOS menu-bar app for 20-20-20 screen breaks. May reduce eye strain and dry-eye symptoms by supporting healthier screen habits.
+Open-source macOS menu-bar app for 20-20-20 screen breaks — a free, open-source alternative to apps like [LookAway](https://lookaway.com/). May reduce eye strain and dry-eye symptoms by supporting healthier screen habits.
 
 EyeBreak lives in your menu bar and, every 20 minutes, invites you to look at something about 20 feet away for 20 seconds — with a few relaxed blinks. You can snooze or skip any break; this is a habit, not a rule.
 
@@ -33,7 +33,22 @@ EyeBreak lives in your menu bar and, every 20 minutes, invites you to look at so
 
 > EyeBreak supports healthier screen habits. It does not diagnose eye disease, replace an eye exam, or improve vision.
 
-## Install & build
+## Install
+
+### Homebrew (recommended)
+
+```sh
+brew tap sviatil0/tap
+brew install --cask eyebreak
+```
+
+### Direct download
+
+Grab `EyeBreak-x.y.z.zip` from the [latest release](https://github.com/sviatil0/eyebreak/releases/latest), unzip, and drag `EyeBreak.app` into `/Applications`.
+
+> **First launch:** EyeBreak is ad-hoc signed, not notarized (no paid Apple Developer account — it's a free open-source app). macOS will block the first launch; allow it via **System Settings → Privacy & Security → Open Anyway**, or install with `brew install --cask --no-quarantine eyebreak`. The source is right here if you'd rather build it yourself:
+
+### Build from source
 
 Requirements: macOS 13+, Xcode Command Line Tools (`xcode-select --install`). No Xcode project, no third-party dependencies.
 
