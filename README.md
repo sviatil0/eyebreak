@@ -6,7 +6,7 @@
 ![Dependencies: none](https://img.shields.io/badge/dependencies-none-lightgrey)
 ![Network: none](https://img.shields.io/badge/network-none-lightgrey)
 
-**Version:** 0.1.0
+**Version:** 0.2.0
 
 Open-source macOS menu-bar app for 20-20-20 screen breaks. May reduce eye strain and dry-eye symptoms by supporting healthier screen habits.
 
