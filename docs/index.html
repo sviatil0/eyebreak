@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EyeBreak — gentle 20-20-20 eye breaks for your Mac</title>
+<meta name="description" content="Free, open-source macOS menu-bar app that reminds you to rest your eyes every 20 minutes. No camera, no network, no nagging.">
+<style>
+  :root {
+    --bg: #fafafa; --card: #ffffff; --ink: #1c1e21; --muted: #5c6470;
+    --accent: #4a7ab5; --accent-soft: #e3edf8; --border: #e2e5ea;
+    --code-bg: #14161a; --code-ink: #e8ecf2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101216; --card: #191c22; --ink: #e8ecf2; --muted: #9aa3b0;
+      --accent: #a8c7e6; --accent-soft: #23303f; --border: #2a2f38;
+      --code-bg: #0b0d10; --code-ink: #dfe6ef;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg); color: var(--ink);
+    display: flex; justify-content: center; padding: 48px 20px 64px;
+  }
+  main { max-width: 560px; width: 100%; }
+  .eye { width: 56px; height: 56px; color: var(--accent); }
+  h1 { font-size: 34px; letter-spacing: -0.5px; margin: 12px 0 4px; }
+  .tagline { color: var(--muted); margin-bottom: 6px; }
+  .claim { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px 24px 20px; margin-bottom: 20px;
+  }
+  .card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 1px;
+             color: var(--accent); margin-bottom: 14px; }
+  ol { padding-left: 22px; }
+  ol li { margin-bottom: 10px; }
+  kbd {
+    background: var(--accent-soft); border-radius: 5px; padding: 1px 7px;
+    font: 14px ui-monospace, SF Mono, Menlo, monospace;
+  }
+  .cmdrow { display: flex; gap: 8px; margin-top: 10px; }
+  pre {
+    flex: 1; background: var(--code-bg); color: var(--code-ink);
+    border-radius: 10px; padding: 12px 14px; overflow-x: auto;
+    font: 13px/1.5 ui-monospace, SF Mono, Menlo, monospace;
+  }
+  button {
+    background: var(--accent); color: var(--bg); border: 0; border-radius: 10px;
+    padding: 0 18px; font: 600 15px -apple-system, sans-serif; cursor: pointer;
+  }
+  button:focus-visible { outline: 3px solid var(--accent-soft); }
+  details { margin-top: 4px; }
+  summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+  details ol { margin-top: 12px; }
+  ul.feats { list-style: none; padding: 0; }
+  ul.feats li { padding-left: 24px; position: relative; margin-bottom: 8px; }
+  ul.feats li::before { content: "✓"; position: absolute; left: 2px; color: var(--accent); }
+  footer { font-size: 13px; color: var(--muted); margin-top: 28px; }
+  footer a { color: var(--accent); }
+  .note { font-size: 14px; color: var(--muted); margin-top: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+    <path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/>
+    <circle cx="12" cy="12" r="3"/>
+  </svg>
+  <h1>EyeBreak</h1>
+  <p class="tagline">Gentle 20-20-20 eye breaks for your Mac. Free and open source.</p>
+  <p class="claim">May reduce eye strain and dry-eye symptoms by supporting healthier screen habits.</p>
+
+  <div class="card">
+    <h2>Install — about a minute</h2>
+    <ol>
+      <li>Press <kbd>⌘</kbd> <kbd>space</kbd>, type <strong>Terminal</strong>, press <kbd>return</kbd>.</li>
+      <li>Click <strong>Copy</strong>, paste into the Terminal window, press <kbd>return</kbd>.</li>
+      <li>Follow any prompts. When it finishes, look for the eye icon in your menu bar (top right).</li>
+    </ol>
+    <div class="cmdrow">
+      <pre id="cmd">curl -fsSL https://raw.githubusercontent.com/sviatil0/eyebreak/main/scripts/install.sh | bash</pre>
+      <button id="copy" aria-label="Copy install command">Copy</button>
+    </div>
+    <p class="note">The command installs <a href="https://brew.sh">Homebrew</a> first if you don't have it — that step may ask for your Mac password.</p>
+    <details>
+      <summary>Prefer a normal download?</summary>
+      <ol>
+        <li>Download the app: <a href="https://github.com/sviatil0/eyebreak/releases/latest">latest release</a> → the <strong>EyeBreak-…zip</strong> file.</li>
+        <li>Unzip it and drag <strong>EyeBreak</strong> into your <strong>Applications</strong> folder, then double-click it.</li>
+        <li>macOS will say it "cannot check it for malicious software" — that's because this free app isn't registered with Apple's paid program. Click <strong>OK</strong>.</li>
+        <li>Open <strong>System Settings → Privacy &amp; Security</strong>, scroll down, click <strong>Open Anyway</strong>, and confirm. It opens normally from then on.</li>
+      </ol>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>What it does</h2>
+    <ul class="feats">
+      <li>Every 20 minutes, a gentle reminder to look ~20 feet away for 20 seconds</li>
+      <li>Snooze or skip any break — it's a habit, not a rule</li>
+      <li>Pauses by itself during presentations and full-screen apps</li>
+      <li>No camera, no account, no internet connection — everything stays on your Mac</li>
+    </ul>
+  </div>
+
+  <footer>
+    MIT-licensed open source — <a href="https://github.com/sviatil0/eyebreak">source code on GitHub</a>.<br>
+    EyeBreak supports comfortable screen habits. It does not diagnose eye disease, replace an eye exam,
+    or improve vision. See an eye-care professional for eye pain, light sensitivity, discharge, sudden
+    vision changes, or symptoms that persist.
+  </footer>
+</main>
+<script>
+  document.getElementById('copy').addEventListener('click', async () => {
+    const text = document.getElementById('cmd').textContent;
+    const btn = document.getElementById('copy');
+    try { await navigator.clipboard.writeText(text); }
+    catch {
+      const r = document.createRange();
+      r.selectNodeContents(document.getElementById('cmd'));
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      document.execCommand('copy'); s.removeAllRanges();
+    }
+    btn.textContent = 'Copied ✓';
+    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+  });
+</script>
+</body>
+</html>

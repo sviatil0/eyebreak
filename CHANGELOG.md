@@ -7,6 +7,7 @@ All notable changes to EyeBreak are documented here. Format follows [Keep a Chan
 ## [0.2.2] — 2026-07-20
 
 ### Added
+- Install landing page for non-technical users at https://sviatil0.github.io/eyebreak/ (#17).
 - One-line installer `scripts/install.sh` (bootstraps Homebrew if needed, installs the cask without quarantine, launches the app) and `INSTALL.txt` packaged inside the release zip (#14).
 
 ### Fixed
