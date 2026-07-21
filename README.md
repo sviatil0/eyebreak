@@ -6,7 +6,7 @@
 ![Dependencies: none](https://img.shields.io/badge/dependencies-none-lightgrey)
 ![Network: none](https://img.shields.io/badge/network-none-lightgrey)
 
-**Version:** 0.2.1
+**Version:** 0.2.2
 
 Open-source macOS menu-bar app for 20-20-20 screen breaks — a free, open-source alternative to apps like [LookAway](https://lookaway.com/). May reduce eye strain and dry-eye symptoms by supporting healthier screen habits.
 
@@ -35,18 +35,29 @@ EyeBreak lives in your menu bar and, every 20 minutes, invites you to look at so
 
 ## Install
 
-### Homebrew (recommended)
+Sending EyeBreak to someone non-technical? Point them at the friendly install page: **https://sviatil0.github.io/eyebreak/**
+
+### One-line install (easiest — no security dialogs)
 
 ```sh
-brew tap sviatil0/tap
-brew install --cask eyebreak
+curl -fsSL https://raw.githubusercontent.com/sviatil0/eyebreak/main/scripts/install.sh | bash
 ```
+
+Checks for Homebrew (installs it if missing), then installs EyeBreak without the Gatekeeper warning and launches it. It's a short script — [read it first](scripts/install.sh) if you like.
+
+### Homebrew
+
+```sh
+brew install --cask sviatil0/tap/eyebreak
+```
+
+(The fully qualified name matters: recent Homebrew versions refuse short names from third-party taps.)
 
 ### Direct download
 
 Grab `EyeBreak-x.y.z.zip` from the [latest release](https://github.com/sviatil0/eyebreak/releases/latest), unzip, and drag `EyeBreak.app` into `/Applications`.
 
-> **First launch:** EyeBreak is ad-hoc signed, not notarized (no paid Apple Developer account — it's a free open-source app). macOS will block the first launch; allow it via **System Settings → Privacy & Security → Open Anyway**, or install with `brew install --cask --no-quarantine eyebreak`. The source is right here if you'd rather build it yourself:
+> **First launch:** EyeBreak is ad-hoc signed, not notarized (no paid Apple Developer account — it's a free open-source app). If you download the zip in a browser, macOS will block the first launch; allow it via **System Settings → Privacy & Security → Open Anyway**, or use the one-line installer above, which avoids the dialog entirely. The source is right here if you'd rather build it yourself:
 
 ### Build from source
 
@@ -105,6 +116,10 @@ Break reminders support comfort, but some symptoms deserve professional care. Se
 - **Full-screen detection is heuristic** (frontmost app's topmost window covering a screen). Some apps may not be detected; the same fail-open policy applies.
 - **Bare-executable mode** (`swift run`) cannot register launch-at-login; use the `.app` bundle from `scripts/make_app.sh`.
 - Daily reminders (warm compress, environment) track their "already fired today" state in memory, so restarting the app within the reminder hour could show one twice.
+- **On notched MacBooks the menu-bar icon can land under the notch** — macOS places new status items leftmost, and in a crowded menu bar that slot is behind the notch: the app runs, but the icon is invisible and unclickable. Fix: Cmd-drag other menu-bar icons away to free visible space, or pin EyeBreak's position right of the notch and relaunch:
+  ```sh
+  defaults write dev.eyebreak.EyeBreak "NSStatusItem Preferred Position Item-0" -float 550
+  ```
 
 ## Contributing
 

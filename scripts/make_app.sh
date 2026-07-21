@@ -5,7 +5,8 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUT_DIR="${1:-$REPO_ROOT/dist}"
-VERSION="0.1.0"
+# Version comes from the newest CHANGELOG section unless overridden via env.
+VERSION="${VERSION:-$(grep -m1 -E '^## \[[0-9]+\.[0-9]+\.[0-9]+\]' "$REPO_ROOT/CHANGELOG.md" | sed -E 's/^## \[([0-9.]+)\].*/\1/')}"
 APP="$OUT_DIR/EyeBreak.app"
 
 echo "==> Building release binary"
@@ -25,5 +26,14 @@ cp "$BIN" "$APP/Contents/MacOS/EyeBreak"
 echo "==> Ad-hoc code signing"
 codesign --force --sign - "$APP"
 
-echo "==> Done: $APP"
-echo "    Drag it into /Applications, or: open \"$APP\""
+echo "==> Packaging $OUT_DIR/EyeBreak-$VERSION.zip"
+STAGE="$(mktemp -d)/EyeBreak"
+mkdir -p "$STAGE"
+cp -R "$APP" "$STAGE/"
+cp "$REPO_ROOT/Resources/INSTALL.txt" "$STAGE/INSTALL.txt"
+rm -f "$OUT_DIR/EyeBreak-$VERSION.zip"
+ditto -c -k --keepParent "$STAGE" "$OUT_DIR/EyeBreak-$VERSION.zip"
+rm -rf "$(dirname "$STAGE")"
+
+echo "==> Done: $APP  +  $OUT_DIR/EyeBreak-$VERSION.zip"
+echo "    Drag the app into /Applications, or: open \"$APP\""
