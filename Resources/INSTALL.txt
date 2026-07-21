@@ -1,0 +1,25 @@
+EyeBreak — install notes
+========================
+
+Easiest path (no security dialogs), paste in Terminal:
+
+  curl -fsSL https://raw.githubusercontent.com/sviatil0/eyebreak/main/scripts/install.sh | bash
+
+Installing this app manually instead? macOS will say:
+"EyeBreak can't be opened because Apple cannot check it for malicious
+software." That's expected — EyeBreak is a free open-source app without
+a paid Apple Developer certificate. One-time fix:
+
+  1. Drag EyeBreak.app into Applications and double-click it.
+  2. In the warning dialog, click OK (not Move to Trash).
+  3. Open System Settings > Privacy & Security, scroll down,
+     click "Open Anyway" next to the EyeBreak message, confirm.
+  4. Done — it opens normally from now on.
+
+Terminal alternative:
+
+  xattr -d com.apple.quarantine /Applications/EyeBreak.app
+
+What it does: gentle 20-20-20 break reminders from your menu bar.
+No camera, no network, no analytics. Source code and details:
+https://github.com/sviatil0/eyebreak
