@@ -4,6 +4,8 @@ All notable changes to EyeBreak are documented here. Format follows [Keep a Chan
 
 ## [Unreleased]
 
+## [0.2.2] — 2026-07-20
+
 ### Added
 - One-line installer `scripts/install.sh` (bootstraps Homebrew if needed, installs the cask without quarantine, launches the app) and `INSTALL.txt` packaged inside the release zip (#14).
 
