@@ -35,6 +35,8 @@ EyeBreak lives in your menu bar and, every 20 minutes, invites you to look at so
 
 ## Install
 
+Sending EyeBreak to someone non-technical? Point them at the friendly install page: **https://sviatil0.github.io/eyebreak/**
+
 ### One-line install (easiest — no security dialogs)
 
 ```sh
