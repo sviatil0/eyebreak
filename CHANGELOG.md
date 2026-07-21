@@ -4,7 +4,11 @@ All notable changes to EyeBreak are documented here. Format follows [Keep a Chan
 
 ## [Unreleased]
 
+### Added
+- One-line installer `scripts/install.sh` (bootstraps Homebrew if needed, installs the cask without quarantine, launches the app) and `INSTALL.txt` packaged inside the release zip (#14).
+
 ### Fixed
+- `make_app.sh` stamped every bundle with version 0.1.0; version now derives from the newest CHANGELOG section (#14).
 - Documented the notched-MacBook pitfall where the menu-bar icon lands under the notch, with verified workarounds (#12).
 
 ## [0.2.1] — 2026-07-19

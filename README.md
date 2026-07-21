@@ -35,18 +35,27 @@ EyeBreak lives in your menu bar and, every 20 minutes, invites you to look at so
 
 ## Install
 
-### Homebrew (recommended)
+### One-line install (easiest — no security dialogs)
 
 ```sh
-brew tap sviatil0/tap
-brew install --cask eyebreak
+curl -fsSL https://raw.githubusercontent.com/sviatil0/eyebreak/main/scripts/install.sh | bash
 ```
+
+Checks for Homebrew (installs it if missing), then installs EyeBreak without the Gatekeeper warning and launches it. It's a short script — [read it first](scripts/install.sh) if you like.
+
+### Homebrew
+
+```sh
+brew install --cask sviatil0/tap/eyebreak
+```
+
+(The fully qualified name matters: recent Homebrew versions refuse short names from third-party taps.)
 
 ### Direct download
 
 Grab `EyeBreak-x.y.z.zip` from the [latest release](https://github.com/sviatil0/eyebreak/releases/latest), unzip, and drag `EyeBreak.app` into `/Applications`.
 
-> **First launch:** EyeBreak is ad-hoc signed, not notarized (no paid Apple Developer account — it's a free open-source app). macOS will block the first launch; allow it via **System Settings → Privacy & Security → Open Anyway**, or install with `brew install --cask --no-quarantine eyebreak`. The source is right here if you'd rather build it yourself:
+> **First launch:** EyeBreak is ad-hoc signed, not notarized (no paid Apple Developer account — it's a free open-source app). If you download the zip in a browser, macOS will block the first launch; allow it via **System Settings → Privacy & Security → Open Anyway**, or use the one-line installer above, which avoids the dialog entirely. The source is right here if you'd rather build it yourself:
 
 ### Build from source
 
